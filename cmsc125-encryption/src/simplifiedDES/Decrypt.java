@@ -1,92 +1,31 @@
 package simplifiedDES;
 
-public class Encrypt {
+public class Decrypt {
 	
 	private int[] k1, k2;
 	private int[] pt = new int[8];
-	private int[] encrypted = new int[8];
+	private int[] decrypted = new int[8];
 
-	public Encrypt() {}
+	public Decrypt() {}
 	
-	public void encrypt(int[] pt, int[] k1, int[] k2) {
+	public void decrypt(int[] pt, int[] k1, int[] k2) {
 		this.pt = pt;
 		this.k1 = k1;
 		this.k2 = k2;
 //		System.out.println("\nStarting encryption");
-//		round1();
-//		round2();
-		
-		initialPerm();
-		this.pt = sw(this.k1);
-		encrypted = ipInverse(this.k2);
-		
-//		initialPerm();
-//		pt = sw(k1);
-//		encrypted = ipInverse();
+		round1();
+		round2();
 	}
 	
 	private void round1() {
 //		System.out.println("ROUND 1");
 //		System.out.print("subkey: ");
-//		for(Integer i : k1) {
-//			System.out.print(i + " ");
-//		}
-//		System.out.println();
-		
-		initialPerm();
-//		int[] ep = ep();
-//		System.out.print("ep: ");
-//		for(Integer i : ep) {
-//			System.out.print(i + " ");
-//		}
-//		System.out.println();
-//		
-//		int[] xor = xorsubkey(k1);
-//		System.out.print("xorsubkey: ");
-//		for(Integer i : xor) {
-//			System.out.print(i + " ");
-//		}
-//		System.out.println();
-//		
-//		int[] sbox = sbox(k1);
-//		System.out.print("sbox: ");
-//		for(Integer i : sbox) {
-//			System.out.print(i + " ");
-//		}
-//		System.out.println();
-//		
-//		int[] p4 = perm4(k1);
-//		System.out.print("p4: ");
-//		for(Integer i : p4) {
-//			System.out.print(i + " ");
-//		}
-//		System.out.println();
-//		
-//		int[] xorFk = xorFk(k1);
-//		System.out.print("xorFk: ");
-//		for(Integer i : xorFk) {
-//			System.out.print(i + " ");
-//		}
-//		System.out.println();
-//		
-//		int[] sw = sw(k1);
-//		System.out.print("finally: ");
-//		for(Integer i : sw) {
-//			System.out.print(i + " ");
-//		}
-//		System.out.println();
-	}
-	
-	private void round2() {
-//		System.out.println("ROUND 2");
-//		System.out.print("subkey: ");
 //		for(Integer i : k2) {
 //			System.out.print(i + " ");
 //		}
 //		System.out.println();
-		
-		pt = sw(k1);
-
+//		
+		initialPerm();
 //		int[] ep = ep();
 //		System.out.print("ep: ");
 //		for(Integer i : ep) {
@@ -122,6 +61,59 @@ public class Encrypt {
 //		}
 //		System.out.println();
 //		
+//		int[] sw = sw(k2);
+//		System.out.print("finally: ");
+//		for(Integer i : sw) {
+//			System.out.print(i + " ");
+//		}
+//		System.out.println();
+	}
+	
+	private void round2() {
+//		System.out.println("ROUND 2");
+//		System.out.print("subkey: ");
+//		for(Integer i : k1) {
+//			System.out.print(i + " ");
+//		}
+//		System.out.println();
+		
+		pt = sw(k2);
+
+//		int[] ep = ep();
+//		System.out.print("ep: ");
+//		for(Integer i : ep) {
+//			System.out.print(i + " ");
+//		}
+//		System.out.println();
+//		
+//		int[] xor = xorsubkey(k1);
+//		System.out.print("xorsubkey: ");
+//		for(Integer i : xor) {
+//			System.out.print(i + " ");
+//		}
+//		System.out.println();
+//		
+//		int[] sbox = sbox(k1);
+//		System.out.print("sbox: ");
+//		for(Integer i : sbox) {
+//			System.out.print(i + " ");
+//		}
+//		System.out.println();
+//		
+//		int[] p4 = perm4(k1);
+//		System.out.print("p4: ");
+//		for(Integer i : p4) {
+//			System.out.print(i + " ");
+//		}
+//		System.out.println();
+//		
+//		int[] xorFk = xorFk(k1);
+//		System.out.print("xorFk: ");
+//		for(Integer i : xorFk) {
+//			System.out.print(i + " ");
+//		}
+//		System.out.println();
+//		
 //		int[] test = test();
 //		System.out.print("test: ");
 //		for(Integer i : test) {
@@ -129,7 +121,7 @@ public class Encrypt {
 //		}
 //		System.out.println();
 		
-		encrypted = ipInverse(k2);
+		decrypted = ipInverse(k1);
 //		System.out.print("finally: ");
 //		for(Integer i : encrypted) {
 //			System.out.print(i + " ");
@@ -152,11 +144,11 @@ public class Encrypt {
 		
 		pt = temp;
 		
-		System.out.print("pt after ip: ");
-		for(Integer i : pt) {
-			System.out.print(i + " ");
-		}
-		System.out.println();
+//		System.out.print("pt after ip: ");
+//		for(Integer i : pt) {
+//			System.out.print(i + " ");
+//		}
+//		System.out.println();
 	}
 	
 	private int[] test(int[] subkey) {
@@ -312,11 +304,11 @@ public class Encrypt {
 		return temp;
 	}
 	
-	public String getEncrypted() {
+	public String getDecrypted() {
 		String res = "";
 		
 		for(int i = 0; i <= 7; i++) {
-			res += Integer.toString(encrypted[i]);
+			res += Integer.toString(decrypted[i]);
 		}
 		
 		return res;
